@@ -10,7 +10,8 @@
       </view>
     </block>
   </scroll-view>
-  <scroll-view scroll-y class="category-right">
+  <!-- 右侧 -->
+  <scroll-view scroll-y class="category-right" scroll-top="{{ rightTop }}">
     <!-- 二级内容 -->
     <block wx:for="{{ rightDate }}" wx:key="cat_id">
       <view class="product-title">

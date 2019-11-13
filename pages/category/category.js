@@ -6,6 +6,7 @@ Page({
    */
   data: {
     activeIndex: 0,
+    rightTop: 0,
     cateData: [],
     rightDate: []
   },
@@ -20,7 +21,10 @@ Page({
     const index = e.currentTarget.dataset.index;
     // console.log(this.data.cateData);  // this 代表页面实例
     this.setData({
+      // 左侧选项卡索引
       activeIndex: index,
+      // 重新让右侧盒子滚动到顶部
+      rightTop: 0,
       // this 代表页面实例，从页面中原本绑定过的数据中，提取出来一部分绑定到 rightDate 中
       rightDate: this.data.cateData[index].children
     });
@@ -38,10 +42,10 @@ Page({
         this.setData({
           cateData: res.data.message,
           // 专门把二级的保存到 rightDate 中
-          rightDate: res.data.message[0].children
+          rightDate: res.data.message[this.data.activeIndex].children
         })
       }
-    })
+    });
   },
 
   /**

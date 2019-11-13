@@ -47,11 +47,12 @@
 .product-title {
   display: flex;
   justify-content: center;
+  margin: 40rpx 0;
 }
 
 .product-title::before, .product-title::after {
   content: '/';
-  color: #000;
+  color: #ccc;
   margin: 0 20rpx;
 }
 
