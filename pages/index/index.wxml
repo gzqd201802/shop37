@@ -1,0 +1,41 @@
+<!-- 1.0 搜索框 -->
+<view class="search">
+  <view class="search-in">
+    <icon type="search" color="#b2b2b2"></icon> 搜索
+  </view>
+</view>
+<!-- 2.0 轮播图 -->
+<view class="slider">
+  <swiper class="slider-swiper" autoplay indicator-dots circular indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff">
+    <swiper-item wx:for="{{ swiperData }}" wx:key="goods_id">
+      <image src="{{ item.image_src }}" mode="aspectFill"></image>
+    </swiper-item>
+  </swiper>
+</view>
+<!-- 3.0 入口导航 -->
+<view class="nav">
+  <block wx:for="{{ navData }}" wx:key="name" wx:for-item="item2" wx:for-index="index2">
+    <view class="nav-item">
+      <image src="{{ item2.image_src }}" class="nav-icon"></image>
+    </view>
+  </block>
+</view>
+
+<!-- 4.0首页楼层 -->
+<block wx:for="{{ floorData }}" wx:key="">
+  <view class="floor-title">
+    <image src="{{ item.floor_title.image_src }}" class="floor-title-image" mode="aspectFit"></image>
+  </view>
+  <view class="floor-body">
+    <block wx:for="{{ item.product_list }}" wx:key="name" wx:for-item="item2">
+      <view class="floor-body-item">
+        <image src="{{ item2.image_src }}"></image>
+      </view>
+    </block>
+  </view>
+</block>
+
+<!-- 5.0 返回顶部 -->
+<view class="toTop" bindtap="goToTop" data-scroll="{{ 0 }}" data-duration="{{ 1000 }}">
+  顶部
+</view>

@@ -1,0 +1,93 @@
+.search {
+  background-color: #eb4450;
+  padding: 20rpx 18rpx;
+}
+
+.search-in {
+  height: 60rpx;
+  background-color: #fff;
+  border-radius: 30rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #b2b2b2;
+}
+
+/* 2.0 轮播图 */
+
+.slider {
+  height: 340rpx;
+}
+
+.slider-swiper {
+  height: 340rpx;
+}
+
+.slider-swiper image {
+  width: 100%;
+  height: 340rpx;
+}
+
+/* 3.0 入口导航 */
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 190rpx;
+}
+
+.nav-icon {
+  width: 128rpx;
+  height: 140rpx;
+  margin-bottom: 10rpx;
+}
+
+/*  */
+.floor-title{
+  height: 88rpx;
+}
+.floor-title-image{
+  height: 100%;
+  width: 100%;
+}
+
+
+.floor-body{
+  overflow: hidden;
+  padding: 15rpx;
+}
+
+.floor-body-item{
+  margin: 5rpx;
+  float: left;
+  width: 232rpx;
+  height: 188rpx;
+}
+.floor-body-item:nth-child(1){
+  height: 386rpx;
+  width: 232rpx;
+}
+.floor-body-item image{
+  width: 100%;
+  height: 100%;
+}
+
+.toTop{
+  position: fixed;
+  right:20rpx;
+  bottom: 20rpx;
+  background-color: hotpink;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 88rpx;
+  height: 88rpx;
+}

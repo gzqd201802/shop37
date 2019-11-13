@@ -1,0 +1,3 @@
+<!--pages/goods_list/goods_list.wxml-->
+<text>pages/goods_list/goods_list.wxml</text>
+<navigator url="/pages/index/index" open-type="switchTab">跳转首页</navigator>
