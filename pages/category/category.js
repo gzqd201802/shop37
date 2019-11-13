@@ -30,13 +30,16 @@ Page({
     });
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
+  // 获取分类数据功能封装抽离
+  getCatData() {
+    // 显示加载框
+    wx.showLoading({
+      title: '疯狂加载中...',
+    });
     // 发起请求
     wx.request({
       url: 'https://api.zbztb.cn/api/public/v1/categories',
+      // 请求成功的回调函数
       success: res => {
         // console.log(res);
         this.setData({
@@ -44,56 +47,35 @@ Page({
           // 专门把二级的保存到 rightDate 中
           rightDate: res.data.message[this.data.activeIndex].children
         })
+      },
+      // 请求失败的回调函数
+      fail: err => {
+        console.log('请求失败的业务逻辑', err);
+      },
+      // 请求结束的回调函数，不管成功还是失败都执行
+      complete: res => {
+        // 不管成功还是失败都执行隐藏提示框
+        wx.hideLoading();
+        // 在手机里面，还有主动调用隐藏加载的API
+        wx.stopPullDownRefresh();
       }
     });
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
+   * 生命周期函数--监听页面加载
    */
-  onReady: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-
+  onLoad: function(options) {
+    // 在页面初次加载的时候获取数据
+    this.getCatData();
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    // 在页面下拉刷新的时候获取数据
+    this.getCatData();
   },
 
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
-  }
 })
