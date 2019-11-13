@@ -1,9 +1,5 @@
 <!-- 1.0 搜索框 -->
-<view class="search">
-  <view class="search-in">
-    <icon type="search" color="#b2b2b2"></icon> 搜索
-  </view>
-</view>
+<search />
 <!-- 2.0 轮播图 -->
 <view class="slider">
   <swiper class="slider-swiper" autoplay indicator-dots circular indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff">
