@@ -1,3 +1,7 @@
+import {
+  myRequest
+} from '../../utils/request';
+// console.log(myRequest);
 // pages/category/category.js
 Page({
 
@@ -32,34 +36,45 @@ Page({
 
   // 获取分类数据功能封装抽离
   getCatData() {
-    // 显示加载框
-    wx.showLoading({
-      title: '疯狂加载中...',
-    });
-    // 发起请求
-    wx.request({
-      url: 'https://api.zbztb.cn/api/public/v1/categories',
-      // 请求成功的回调函数
-      success: res => {
-        // console.log(res);
+    // 调用自己封装的 myRequest 函数，内部返回 Promise 实例
+    myRequest({
+        url: 'categories'
+      })
+      .then(res => {
         this.setData({
           cateData: res.data.message,
           // 专门把二级的保存到 rightDate 中
           rightDate: res.data.message[this.data.activeIndex].children
         })
-      },
-      // 请求失败的回调函数
-      fail: err => {
-        console.log('请求失败的业务逻辑', err);
-      },
-      // 请求结束的回调函数，不管成功还是失败都执行
-      complete: res => {
-        // 不管成功还是失败都执行隐藏提示框
-        wx.hideLoading();
-        // 在手机里面，还有主动调用隐藏加载的API
-        wx.stopPullDownRefresh();
-      }
-    });
+      })
+    // // 显示加载框
+    // wx.showLoading({
+    //   title: '疯狂加载中...',
+    // });
+    // // 发起请求
+    // wx.request({
+    //   url: 'https://api.zbztb.cn/api/public/v1/categories',
+    //   // 请求成功的回调函数
+    //   success: res => {
+    //     // console.log(res);
+    //     this.setData({
+    //       cateData: res.data.message,
+    //       // 专门把二级的保存到 rightDate 中
+    //       rightDate: res.data.message[this.data.activeIndex].children
+    //     })
+    //   },
+    //   // 请求失败的回调函数
+    //   fail: err => {
+    //     console.log('请求失败的业务逻辑', err);
+    //   },
+    //   // 请求结束的回调函数，不管成功还是失败都执行
+    //   complete: res => {
+    //     // 不管成功还是失败都执行隐藏提示框
+    //     wx.hideLoading();
+    //     // 在手机里面，还有主动调用隐藏加载的API
+    //     wx.stopPullDownRefresh();
+    //   }
+    // });
   },
 
   /**
