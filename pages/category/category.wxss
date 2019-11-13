@@ -1,1 +1,74 @@
 /* pages/category/category.wxss */
+
+.category {
+  width: 100vw;
+  /* clac() ，CSS3 计算功能 *//*  */
+  height: calc(100vh - 100rpx);
+  display: flex;
+}
+
+.category-left {
+  background-color: #f4f4f4;
+  width: 200rpx;
+  /* scroll-view 需要设定高度 */
+  height: 100%;
+}
+
+.category-left-item {
+  height: 100rpx;
+  border-bottom: 1rpx solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.active {
+  color: #eb4450;
+  font-weight: bold;
+  background-color: #fff;
+  position: relative;
+}
+.active::before{
+  content: "";
+  width: 10rpx;
+  background-color: #eb4450;
+  height: 60rpx;
+  position: absolute;
+  left: 0;
+}
+
+.category-right {
+  background-color: #fff;
+  /* flex: 1; */
+  width: calc(100vw - 200rpx);
+  height: 100%;
+}
+
+.product-title {
+  display: flex;
+  justify-content: center;
+}
+
+.product-title::before, .product-title::after {
+  content: '/';
+  color: #000;
+  margin: 0 20rpx;
+}
+
+.product-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product-list-item{
+  width: 33.33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20rpx 0;
+}
+.product-list-item image{
+  width: 120rpx;
+  height: 120rpx;
+}

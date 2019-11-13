@@ -1,2 +1,30 @@
-<!--pages/category/category.wxml-->
+<!--引入自定义搜索组件-->
 <search />
+<!-- 左右盒子 -->
+<view class="category">
+  <scroll-view scroll-y class="category-left">
+    <!-- 一级内容 -->
+    <block wx:for="{{ cateData }}" wx:key="cat_id">
+      <view bindtap="changeTab" data-index="{{ index }}" data-id="{{ item.cat_id }}" class="category-left-item {{ index === activeIndex ? 'active' : '' }}">
+        {{ item.cat_name }}
+      </view>
+    </block>
+  </scroll-view>
+  <scroll-view scroll-y class="category-right">
+    <!-- 二级内容 -->
+    <block wx:for="{{ rightDate }}" wx:key="cat_id">
+      <view class="product-title">
+        {{ item.cat_name }}
+      </view>
+      <view class="product-list">
+        <!-- 三级内容 -->
+        <block wx:for="{{ item.children }}" wx:key="cat_id" wx:for-item="item2">
+          <view class="product-list-item">
+            <image src="{{ item2.cat_icon }}"></image>
+            <text>{{ item2.cat_name }}</text>
+          </view>
+        </block>
+      </view>
+    </block>
+  </scroll-view>
+</view>
