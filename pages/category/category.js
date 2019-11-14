@@ -1,3 +1,4 @@
+// 小程序的 import 导入语法只能使用相对路径，相对路径有路径提示。
 import {
   myRequest
 } from '../../utils/request';
@@ -38,15 +39,18 @@ Page({
   getCatData() {
     // 调用自己封装的 myRequest 函数，内部返回 Promise 实例
     myRequest({
-        url: 'categories'
-      })
-      .then(res => {
-        this.setData({
-          cateData: res.data.message,
-          // 专门把二级的保存到 rightDate 中
-          rightDate: res.data.message[this.data.activeIndex].children
-        })
-      })
+      // 不需要传递根路径了
+      url: 'categories'
+    }).then(res => {
+      // console.log('then回调函数的', res);
+      // 返回值 res 已经是核心数据了，直接进行数据绑定
+      this.setData({
+        // 全部数据的绑定
+        cateData: res,
+        // 右侧商品数据绑定
+        rightDate: res[0].children
+      });
+    });
     // // 显示加载框
     // wx.showLoading({
     //   title: '疯狂加载中...',
