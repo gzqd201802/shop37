@@ -28,13 +28,11 @@
 .product-item-left {
   width: 200rpx;
   height: 200rpx;
-  background-color: #ccc;
 }
 
 .product-item-right {
   flex: 1;
   margin-left: 20rpx;
-  background-color: pink;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
