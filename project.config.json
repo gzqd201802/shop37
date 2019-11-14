@@ -47,10 +47,10 @@
 			"current": -1,
 			"list": [
 				{
-					"id": -1,
+					"id": 0,
 					"name": "列表页",
 					"pathName": "pages/goods_list/goods_list",
-					"query": "cid=5&query=电视",
+					"query": "cid=6&query=电视",
 					"scene": null
 				}
 			]

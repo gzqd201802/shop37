@@ -32,7 +32,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    goodsData: {},
+    goods: [],
     query: '',
     cid: '',
     pagenum: 1,
@@ -54,7 +54,7 @@ Page({
       }
     }).then(res => {
       this.setData({
-        goodsData: res,
+        goods: [...this.data.goods, ...res.goods],
         total: res.total
       })
     })
@@ -82,6 +82,7 @@ Page({
       pagesize
     } = this.data;
 
+    // 请求列表数据
     this.getGoods({
       // 传递 cid，请求的时候需要根据 cid 查询数据，注意这里的名字不能改
       cid,
@@ -89,54 +90,65 @@ Page({
       pagenum,
       pagesize
     })
-    
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function() {
 
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function() {
+  // 上拉触底事件 - 注意不要被覆盖了，把多余的生命周期函数和页面事件删除
+  onReachBottom() {
+    let {
+      cid,
+      query,
+      pagenum,
+      pagesize,
+      total
+    } = this.data;
+
+    if (pagenum < Math.ceil(total / pagesize)) {
+      // 页面先+1
+      this.setData({
+        pagenum: ++pagenum
+      })
+      // 请求列表数据
+      this.getGoods({
+        // 传递 cid，请求的时候需要根据 cid 查询数据，注意这里的名字不能改
+        cid,
+        query,
+        pagenum,
+        pagesize
+      })
+    } else {
+      // 弹出提示框
+      wx.showToast({
+        title: '我是有底线的...',
+      })
+    }
 
   },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function() {
-    console.log('onHide');
-  },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function() {
-    console.log('onUnload-普通页卸载');
-  },
+  // 下拉刷新事件
+  onPullDownRefresh() {
+    let {
+      cid,
+      query,
+      pagesize
+    } = this.data;
 
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function() {
+    this.setData({
+      // 商品列表重置
+      goods: [],
+      // 页码需要重置
+      pagenum: 1
+    })
 
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
+    // 请求列表数据
+    this.getGoods({
+      // 传递 cid，请求的时候需要根据 cid 查询数据，注意这里的名字不能改
+      cid,
+      query,
+      pagenum: 1,
+      pagesize
+    })
 
   }
+
 })
