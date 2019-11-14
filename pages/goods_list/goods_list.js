@@ -1,7 +1,7 @@
 /* 
 1 用户上滑页面 滚动条触底 开始加载下一页数据
   1 找到滚动条触底事件  微信小程序官方开发文档寻找
-  2 判断还有没有下一页数据
+  2 判断还有没有下一页数据 **
     1 获取到总页数  只有总条数
       总页数 = Math.ceil(总条数 /  页容量  pagesize)
       总页数     = Math.ceil( 21 / 20 ) = 2
@@ -42,6 +42,12 @@ Page({
 
   // 封装列表页请求数据
   getGoods(obj) {
+    
+    const {
+      query,
+      cid,
+      pagesize
+    } = this.data;
 
     myRequest({
       // url 路径，注意有 goods 
@@ -50,7 +56,10 @@ Page({
       data: {
         // cid 从分类页过来的 cid 值
         // cid: "5"
-        ...obj
+        ...obj,
+        query,
+        cid,
+        pagesize
       }
     }).then(res => {
       this.setData({
@@ -78,17 +87,13 @@ Page({
     })
 
     const {
-      pagenum,
-      pagesize
+      pagenum
     } = this.data;
 
     // 请求列表数据
     this.getGoods({
       // 传递 cid，请求的时候需要根据 cid 查询数据，注意这里的名字不能改
-      cid,
-      query,
-      pagenum,
-      pagesize
+      pagenum
     })
 
   },
@@ -96,8 +101,6 @@ Page({
   // 上拉触底事件 - 注意不要被覆盖了，把多余的生命周期函数和页面事件删除
   onReachBottom() {
     let {
-      cid,
-      query,
       pagenum,
       pagesize,
       total
@@ -111,10 +114,7 @@ Page({
       // 请求列表数据
       this.getGoods({
         // 传递 cid，请求的时候需要根据 cid 查询数据，注意这里的名字不能改
-        cid,
-        query,
         pagenum,
-        pagesize
       })
     } else {
       // 弹出提示框
@@ -127,11 +127,6 @@ Page({
 
   // 下拉刷新事件
   onPullDownRefresh() {
-    let {
-      cid,
-      query,
-      pagesize
-    } = this.data;
 
     this.setData({
       // 商品列表重置
@@ -143,10 +138,7 @@ Page({
     // 请求列表数据
     this.getGoods({
       // 传递 cid，请求的时候需要根据 cid 查询数据，注意这里的名字不能改
-      cid,
-      query,
       pagenum: 1,
-      pagesize
     })
 
   }

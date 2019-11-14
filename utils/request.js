@@ -1,3 +1,4 @@
+// 定义项目的请求的根路径
 const baseURL = 'https://api.zbztb.cn/api/public/v1/';
 
 // 我们预期调用时候的写法
@@ -19,6 +20,7 @@ export const myRequest = (obj) => {
   return new Promise((resolve, reject) => {
     // 内部的代码发起请求
     wx.request({
+      // 解构所有参数
       ...obj,
       // 拼接 url 路径
       url: baseURL + obj.url,
