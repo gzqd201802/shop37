@@ -10,6 +10,10 @@ const baseURL = 'https://api.zbztb.cn/api/public/v1/';
 // })
 
 export const myRequest = (obj) => {
+  // 在发起请求的时候，先显示加载提示框
+  wx.showLoading({
+    title: '疯狂加载中...',
+  });
   // resolve 成功时候的回调函数，对应  实例.then()
   // reject  失败时候的回调函数，对应  实例.catch()
   return new Promise((resolve, reject) => {
@@ -27,6 +31,13 @@ export const myRequest = (obj) => {
       // 失败时候的回调函数 reject
       fail: res => {
         reject(res)
+      },
+      // 结束的时候，不管成功还是失败
+      complete: res => {
+        // 隐藏加载框
+        wx.hideLoading();
+        // 隐藏下拉刷新动画
+        wx.stopPullDownRefresh();
       }
     });
   })

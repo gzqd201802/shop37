@@ -20,10 +20,10 @@
       <view class="product-list">
         <!-- 三级内容 -->
         <block wx:for="{{ item.children }}" wx:key="cat_id" wx:for-item="item2">
-          <view class="product-list-item">
+          <navigator url="/pages/goods_list/goods_list?cid={{item2.cat_id}}&query={{item2.cat_name}}" class="product-list-item">
             <image src="{{ item2.cat_icon }}"></image>
             <text>{{ item2.cat_name }}</text>
-          </view>
+          </navigator>
         </block>
       </view>
     </block>

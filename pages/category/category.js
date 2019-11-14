@@ -50,35 +50,7 @@ Page({
         // 右侧商品数据绑定
         rightDate: res[0].children
       });
-    });
-    // // 显示加载框
-    // wx.showLoading({
-    //   title: '疯狂加载中...',
-    // });
-    // // 发起请求
-    // wx.request({
-    //   url: 'https://api.zbztb.cn/api/public/v1/categories',
-    //   // 请求成功的回调函数
-    //   success: res => {
-    //     // console.log(res);
-    //     this.setData({
-    //       cateData: res.data.message,
-    //       // 专门把二级的保存到 rightDate 中
-    //       rightDate: res.data.message[this.data.activeIndex].children
-    //     })
-    //   },
-    //   // 请求失败的回调函数
-    //   fail: err => {
-    //     console.log('请求失败的业务逻辑', err);
-    //   },
-    //   // 请求结束的回调函数，不管成功还是失败都执行
-    //   complete: res => {
-    //     // 不管成功还是失败都执行隐藏提示框
-    //     wx.hideLoading();
-    //     // 在手机里面，还有主动调用隐藏加载的API
-    //     wx.stopPullDownRefresh();
-    //   }
-    // });
+    })
   },
 
   /**
@@ -93,6 +65,13 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
+    // 先清空了全部
+    this.setData({
+      activeIndex: 0,
+      rightTop: 0,
+      cateData: [],
+      rightDate: []
+    });
     // 在页面下拉刷新的时候获取数据
     this.getCatData();
   },
