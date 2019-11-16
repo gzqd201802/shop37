@@ -3,5 +3,6 @@
     "search":"/component/search/search"
   },
   "backgroundTextStyle": "dark",
+  "navigationBarTitleText": "商品列表",
   "enablePullDownRefresh": true
 }

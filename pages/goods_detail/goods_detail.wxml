@@ -1,2 +1,37 @@
-<!--pages/goods_detail/goods_detail.wxml-->
-<text>pages/goods_detail/goods_detail.wxml</text>
+<swiper class="slider-swiper" autoplay indicator-dots circular>
+  <swiper-item wx:for="{{ goodsDetail.pics }}" wx:key="pics_id">
+    <image bindtap="previewBigImage" data-curr="{{ item.pics_big }}" src="{{ item.pics_big }}" mode="aspectFill"></image>
+  </swiper-item>
+</swiper>
+
+<view>
+  商品详情
+</view>
+
+<!-- 富文本处理 -->
+<view class="goods-content">
+  <rich-text nodes="{{ introduce }}"></rich-text>
+</view>
+
+
+<view class="fixed-bar">
+  <view class="bar-item">
+    <!-- 通过按钮打开客服功能，按钮透明度为0 -->
+    <button open-type="contact">客服</button>
+    客服
+  </view>
+  <view class="bar-item">
+    <!-- 通过按钮打开分享功能，按钮透明度为0 -->
+    <button open-type="share">分享</button>
+    分享
+  </view>
+  <view class="bar-item" bindtap="goToCart">
+    购物车
+  </view>
+  <view class="bar-btn">
+    加入购物车
+  </view>
+  <view class="bar-btn">
+    立即购买
+  </view>
+</view>
