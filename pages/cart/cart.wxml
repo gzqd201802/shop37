@@ -1,2 +1,49 @@
-<!--pages/cart/cart.wxml-->
-<text>pages/cart/cart.wxml</text>
+<view class="address">
+  <button>获取收货地址</button>
+</view>
+
+<view class="cart">
+  <view class="cart-title">优购生活馆</view>
+  <view class="cart-list">
+    <block wx:for="{{ cartArr }}" wx:key="goods_id">
+    <view class="cart-item">
+      <view class="cart-item-left">
+        <radio color="#da5155" checked="{{ item.goods_checked }}"></radio>
+      </view>
+      <view class="cart-item-right">
+        <navigator url="/pages/goods_detail/goods_detail?goods_id={{ item.goods_id }}" class="product-item">
+          <image class="product-item-left" src="{{ item.goods_small_logo || '/images/default.svg' }}"></image>
+          <view class="product-item-right">
+            <view class="product-name">{{ item.goods_name || '商品名称' }}</view>
+            <view class="product-price">{{ item.goods_price || '999' }}</view>
+          </view>
+        </navigator>
+        <view class="count">
+        <!-- 减号按钮 -->
+          <view bindtap="changeCount" data-number="{{ -1 }}" data-index="{{ index }}" class="count-btn">-</view>
+          <view class="count-number">{{ item.goods_count }}</view>
+        <!-- 加号按钮 -->
+          <view bindtap="changeCount" data-number="{{ 1 }}"  data-index="{{ index }}" class="count-btn">+</view>
+        </view>
+      </view>
+    </view>
+    </block>
+  </view>
+</view>
+
+<view class="fixed-bar">
+  <view class="bar-group">
+    <view class="all-checked">
+      <radio color="#da5155" checked="{{ true }}"></radio>
+      <text>全选</text>
+    </view>
+    <view class="total">
+      <view class="total-top">
+        <text class="total-text">合计</text>
+        <text class="total-price">9999</text>
+      </view>
+      <view class="total-down">包含运费</view>
+    </view>
+  </view>
+  <view class="bar-btn">结算(3)</view>
+</view>
