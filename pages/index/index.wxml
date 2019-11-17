@@ -33,5 +33,5 @@
 
 <!-- 5.0 返回顶部 -->
 <view class="toTop" bindtap="goToTop" data-scroll="{{ 0 }}" data-duration="{{ 1000 }}">
-  顶部
+  <text>顶部</text>
 </view>

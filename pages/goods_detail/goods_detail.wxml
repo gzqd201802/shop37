@@ -5,10 +5,22 @@
   </swiper-item>
 </swiper>
 
-<view>
+<view class="goods-price">
+  <text>{{goodsDetail.goods_price}}</text>
+</view>
+<view class="goods-info">
+  <view class="goods-name">
+    {{goodsDetail.goods_name}}{{goodsDetail.goods_name}}
+  </view>
+  <view class="goods-collect" bindtap="handleCollect">
+    <text class="">图标</text>
+    <view class="collect_text">收藏</view>
+  </view>
+</view>
+<view class="divider"></view>
+<view class="goods-title">
   商品详情
 </view>
-
 <!-- 富文本处理 -->
 <view class="goods-content">
   <rich-text nodes="{{ introduce }}"></rich-text>

@@ -106,7 +106,7 @@ Page({
       // 默认的icon，可选值，success，loading，none
       // icon:'none',
       // 自定义图标 - 图标级别高于 icon
-      image: '/images/default.svg',
+      // image: '/images/default.svg',
       // 提示文字
       title: '加入购物车成功',
       // 持续时间

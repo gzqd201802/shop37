@@ -1,6 +1,7 @@
 /* pages/cart/cart.wxss */
 page{
   background-color: #f4f4f4;
+  padding-bottom: 120rpx;
 }
 .address{
   height: 200rpx;
@@ -9,6 +10,7 @@ page{
   align-items: center;
   justify-content: center;
   margin-bottom: 20rpx;
+   border-bottom: 10rpx solid #eb4450;
 }
 .address-info{
   display: flex;
@@ -20,6 +22,10 @@ page{
 
 .cart{
   background-color: #fff;
+}
+.cart-title{
+  padding: 20rpx;
+  border-bottom:1rpx solid #ddd;
 }
 
 .cart-item{
@@ -40,6 +46,10 @@ page{
   display: flex;
   padding: 30rpx 0;
   border-bottom: 1rpx solid #ddd;
+}
+
+.cart-item:last-child .product-item{
+  border:0 none;
 }
 
 .product-item-left {
@@ -120,6 +130,10 @@ page{
 .total-price::before{
   content: "￥";
   font-size: 80%;
+}
+.total-down{
+  font-size: 80%;
+  color:#999;
 }
 .bar-btn{
   width: 230rpx;
