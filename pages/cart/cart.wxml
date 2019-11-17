@@ -8,7 +8,7 @@
     <block wx:for="{{ cartArr }}" wx:key="goods_id">
     <view class="cart-item">
       <view class="cart-item-left">
-        <radio color="#da5155" checked="{{ item.goods_checked }}"></radio>
+        <radio color="#da5155" bindtap="changeCheck" data-index="{{ index }}" checked="{{ item.goods_checked }}"></radio>
       </view>
       <view class="cart-item-right">
         <navigator url="/pages/goods_detail/goods_detail?goods_id={{ item.goods_id }}" class="product-item">
@@ -33,17 +33,17 @@
 
 <view class="fixed-bar">
   <view class="bar-group">
-    <view class="all-checked">
-      <radio color="#da5155" checked="{{ true }}"></radio>
+    <view class="all-checked" bindtap="changeCheckAll">
+      <radio color="#da5155" checked="{{ checkAll }}"></radio>
       <text>全选</text>
     </view>
     <view class="total">
       <view class="total-top">
         <text class="total-text">合计</text>
-        <text class="total-price">9999</text>
+        <text class="total-price">{{ totalMoney }}</text>
       </view>
       <view class="total-down">包含运费</view>
     </view>
   </view>
-  <view class="bar-btn">结算(3)</view>
+  <view class="bar-btn">结算({{ totalCount }})</view>
 </view>
