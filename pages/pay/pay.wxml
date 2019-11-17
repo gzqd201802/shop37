@@ -9,7 +9,7 @@
   <view class="cart-title">购物车</view>
   <view class="cart-list">
     <block wx:for="{{ cartArr }}" wx:key="goods_id">
-    <view class="cart-item">
+    <view class="cart-item" wx:if="{{ item.goods_checked }}">
       <view class="cart-item-right">
         <navigator url="/pages/goods_detail/goods_detail?goods_id={{ item.goods_id }}" class="product-item">
           <image class="product-item-left" src="{{ item.goods_small_logo || '/images/default.svg' }}"></image>
@@ -37,5 +37,8 @@
       <view class="total-down">包含运费</view>
     </view>
   </view>
-  <view class="bar-btn">支付({{ totalCount }})</view>
+  <view class="bar-btn">
+    支付({{ totalCount }})
+    <button class="token-btn" open-type="getUserInfo" bindgetuserinfo="getToken">获取用户信息</button>
+  </view>
 </view>

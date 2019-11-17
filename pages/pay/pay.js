@@ -1,4 +1,6 @@
 // pages/cart/cart.js
+import { myRequest } from '../../utils/request.js'
+
 Page({
 
   /**
@@ -11,6 +13,43 @@ Page({
     address: {}
   },
 
+  getToken(e){
+    // console.log(e);
+    const {
+      encryptedData, iv, rawData, signature
+    } = e.detail;
+
+    wx.login({
+      success:res=>{
+        // console.log(res);
+        const { code } = res;
+
+        // 发起 post 请求获取 token
+        myRequest({
+          url:'users/wxlogin',
+          method:'POST',
+          data:{
+            encryptedData, iv, rawData, signature, code
+          }
+        }).then(res=>{
+          // console.log(res);
+          if(res===null){
+            wx.showToast({
+              title: '登录失败,请重新登录',
+            });
+          }else{
+            const { token } = res;
+            wx.setStorageSync('token', token);
+            wx.setStorageSync('rawData', JSON.parse(rawData));
+          }
+          
+        })
+
+      }
+    });
+
+
+  },
   // 封装的方法，更新购物车列表，更新总价格，更新选中件数，更新全选按钮，更新本地存储
   updateCart(cartArr) {
 
