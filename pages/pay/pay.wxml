@@ -38,7 +38,7 @@
     </view>
   </view>
   <view class="bar-btn">
-    支付({{ totalCount }})
-    <button class="token-btn" open-type="getUserInfo" bindgetuserinfo="getToken">获取用户信息</button>
+    <view bindtap="payHandle"> 支付({{ totalCount }})</view>
+    <button class="token-btn" wx:if="{{ !token }}" open-type="getUserInfo" bindgetuserinfo="getToken">获取用户信息</button>
   </view>
 </view>

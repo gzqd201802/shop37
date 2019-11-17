@@ -11,6 +11,12 @@ const baseURL = 'https://api.zbztb.cn/api/public/v1/';
 // })
 
 export const myRequest = (obj) => {
+  // v2.0 如果有 header 就直接使用，没有就赋值空对象
+  obj.header = obj.header || {};
+  // v2.0 检查 url 的字符串中是否包含了 my/ 路径，如果包含，就在请求头带上token
+  if (obj.url.includes('my/')===true){
+    obj.header.Authorization = wx.getStorageSync('token');
+  }
   // 在发起请求的时候，先显示加载提示框
   wx.showLoading({
     title: '疯狂加载中...',
