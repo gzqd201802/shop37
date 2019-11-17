@@ -9,30 +9,60 @@ Page({
     totalMoney: 0,
     totalCount: 0,
     checkAll: false,
-    address:{}
+    address: {}
   },
+  // 跳转支付页面
+  goToPay() {
+    const {
+      address,
+      totalCount
+    } = this.data;
+    // 1.检测是否选择收货地址
+    if (!address.userName) {
+      wx.showToast({
+        title: '请选择收货地址',
+        icon: 'none'
+      });
+    } else if (totalCount === 0) {
+      // 2. 检测是否有勾选商品
+      wx.showToast({
+        title: '请选择商品',
+        icon: 'none'
+      });
+    } else {
+      // 3. 跳转支付页
+      wx.navigateTo({
+        url: '/pages/pay/pay',
+      })
+    }
 
+
+
+
+  },
+  // 选择收货地址的核心功能
   chooseAddressMain() {
     // 调用起微信内置的收货地址功能 - 微信原生的界面 - 开发者不可编辑
     wx.chooseAddress({
+      // 用户点击了收货地址
       success: res => {
-        console.log(res);
+        // 解构收货地址核心信息
         const {
           userName, telNumber, provinceName, cityName, countyName, detailInfo, postalCode
         } = res;
-        
+        // 组装成自己需要的格式
         const address = {
           userName,
           telNumber,
           postalCode,
           addressDetail: `${provinceName}${cityName}${countyName}${detailInfo}`
-      }
-        // 更新页面数据
+        }
+        // 更新页面收货地址数据
         this.setData({
           address
         });
 
-        // 本地存储保存一下
+        // 收货地址本地存储保存一下
         wx.setStorageSync('address', address)
 
       }
@@ -54,13 +84,13 @@ Page({
               // console.log(res);
               // 如果用户在设置界面开启了授权
               if (res.authSetting['scope.address'] === true) {
-                // 通过 API 方式调用收货地址
+                // 已经授权，通过 API 方式调用收货地址
                 this.chooseAddressMain();
               }
             }
           });
         } else {
-          // 通过 API 方式调用收货地址
+          // 已经授权，通过 API 方式调用收货地址
           this.chooseAddressMain();
         }
         // false      !!授权窗口点击了取消-用户拒绝了授权 - 打开设置界面 - 让用户点击开启授权
@@ -194,7 +224,9 @@ Page({
   onShow: function () {
     // 获取本地存储购物车的数据
     const cartArr = wx.getStorageSync('cartArr') || [];
+    // 获取收货地址本地存储数据
     const address = wx.getStorageSync('address') || {};
+    // 地址信息更新到页面中
     this.setData({
       address
     })
