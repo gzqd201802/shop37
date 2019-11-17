@@ -8,31 +8,60 @@ Page({
     cartArr: [],
     totalMoney: 0,
     totalCount: 0,
-    checkAll: false
+    checkAll: false,
+    address:{}
+  },
+
+  chooseAddressMain() {
+    // 调用起微信内置的收货地址功能 - 微信原生的界面 - 开发者不可编辑
+    wx.chooseAddress({
+      success: res => {
+        console.log(res);
+        const {
+          userName, telNumber, provinceName, cityName, countyName, detailInfo, postalCode
+        } = res;
+        
+        const address = {
+          userName,
+          telNumber,
+          postalCode,
+          addressDetail: `${provinceName}${cityName}${countyName}${detailInfo}`
+      }
+        // 更新页面数据
+        this.setData({
+          address
+        });
+
+        // 本地存储保存一下
+        wx.setStorageSync('address', address)
+
+      }
+    })
   },
 
   // 获取收货地址功能
-  getAddressHandle(){
+  getAddressHandle() {
     // 获取用户授权的情况
     wx.getSetting({
-      success:res=>{
+      success: res => {
         // console.log(res.authSetting);
         // console.log(res.authSetting['scope.address'])
         // 如果用户点击了拒绝，需要引导用户重新在设置界面开启，否则收货地址接口无法调用
-        if (res.authSetting['scope.address'] === false){
+        if (res.authSetting['scope.address'] === false) {
           // 打开用户设置界面
           wx.openSetting({
-            success:res=>{
+            success: res => {
               // console.log(res);
               // 如果用户在设置界面开启了授权
-              if (res.authSetting['scope.address'] === true){
-                // // 通过 API 方式调用收货地址
-                wx.chooseAddress({
-
-                })
+              if (res.authSetting['scope.address'] === true) {
+                // 通过 API 方式调用收货地址
+                this.chooseAddressMain();
               }
             }
           });
+        } else {
+          // 通过 API 方式调用收货地址
+          this.chooseAddressMain();
         }
         // false      !!授权窗口点击了取消-用户拒绝了授权 - 打开设置界面 - 让用户点击开启授权
         // undefined  从来没有调用过授权请求的情况
@@ -40,10 +69,7 @@ Page({
       }
     });
 
-    // 通过 API 方式调用收货地址
-    wx.chooseAddress({
-      
-    })
+
 
   },
 
@@ -165,9 +191,13 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
     // 获取本地存储购物车的数据
     const cartArr = wx.getStorageSync('cartArr') || [];
+    const address = wx.getStorageSync('address') || {};
+    this.setData({
+      address
+    })
     // 更新视图的变化，包括购物车列表，总价格，选中件数，全选按钮
     this.updateCart(cartArr);
   },

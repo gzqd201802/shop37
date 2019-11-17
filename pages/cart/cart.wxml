@@ -1,5 +1,11 @@
-<view class="address">
-  <button bindtap="getAddressHandle">+获取收货地址</button>
+<view class="address" bindtap="getAddressHandle">
+  <view class="address-empty" wx:if="{{ !address.userName }}">
+    <button>+获取收货地址</button>
+  </view>
+  <view class="address-info" wx:else>
+    <text>用户名：{{ address.userName }}    {{ address.telNumber }}</text>
+    <text>收货地址：{{ address.addressDetail }}</text>
+  </view>
 </view>
 
 <view class="cart">
