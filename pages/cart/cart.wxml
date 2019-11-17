@@ -1,5 +1,5 @@
 <view class="address">
-  <button>获取收货地址</button>
+  <button bindtap="getAddressHandle">+获取收货地址</button>
 </view>
 
 <view class="cart">
@@ -46,4 +46,10 @@
     </view>
   </view>
   <view class="bar-btn">结算({{ totalCount }})</view>
+</view>
+
+<!-- 空购物车处理 -->
+<view class="empty-cart" wx:if="{{ cartArr.length === 0 }}">
+  <image class="empty-cart-image" src="/images/empty_cart.svg"></image>
+  <navigator  class="empty-cart-btn" url="/pages/index/index" open-type="switchTab">去首页逛逛</navigator>
 </view>

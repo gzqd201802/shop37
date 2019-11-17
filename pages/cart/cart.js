@@ -11,6 +11,42 @@ Page({
     checkAll: false
   },
 
+  // 获取收货地址功能
+  getAddressHandle(){
+    // 获取用户授权的情况
+    wx.getSetting({
+      success:res=>{
+        // console.log(res.authSetting);
+        // console.log(res.authSetting['scope.address'])
+        // 如果用户点击了拒绝，需要引导用户重新在设置界面开启，否则收货地址接口无法调用
+        if (res.authSetting['scope.address'] === false){
+          // 打开用户设置界面
+          wx.openSetting({
+            success:res=>{
+              // console.log(res);
+              // 如果用户在设置界面开启了授权
+              if (res.authSetting['scope.address'] === true){
+                // // 通过 API 方式调用收货地址
+                wx.chooseAddress({
+
+                })
+              }
+            }
+          });
+        }
+        // false      !!授权窗口点击了取消-用户拒绝了授权 - 打开设置界面 - 让用户点击开启授权
+        // undefined  从来没有调用过授权请求的情况
+        // true       授权窗口点击了确定-用户授权了
+      }
+    });
+
+    // 通过 API 方式调用收货地址
+    wx.chooseAddress({
+      
+    })
+
+  },
+
   // 加减号改变数量
   changeCount(e) {
     const {
@@ -79,10 +115,12 @@ Page({
       cartArr
     } = this.data;
 
+    // 遍历每一项，把 checkAll 取反后的状态更新列表每一项中
     cartArr.forEach(v => {
       v.goods_checked = !checkAll;
     });
 
+    // 更新视图的变化，包括购物车列表，总价格，选中件数，全选按钮
     this.updateCart(cartArr);
   },
 
@@ -96,8 +134,11 @@ Page({
 
     // 遍历购物车数组
     cartArr.forEach(v => {
+      // 如果是选中的状态
       if (v.goods_checked) {
+        // 计算总金额 = 数量 * 单价
         totalMoney += v.goods_count * v.goods_price;
+        // 选中的商品数量累加
         totalCount++;
       }
     });
@@ -122,25 +163,13 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function(options) {
-    console.log('onLoad')
-  },
-
-  /**
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-    console.log('onShow');
+    // 获取本地存储购物车的数据
     const cartArr = wx.getStorageSync('cartArr') || [];
-
+    // 更新视图的变化，包括购物车列表，总价格，选中件数，全选按钮
     this.updateCart(cartArr);
-    // this.setData({
-    //   cartArr
-    // })
-
-
   },
 
 })
