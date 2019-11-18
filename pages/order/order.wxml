@@ -1,2 +1,9 @@
-<!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+<view class="tabs">
+    <block wx:for="{{ tabs }}" wx:key="type">
+        <view bindtap="changeTabs" 
+        data-type="{{ item.type }}" 
+        class="tabs-item {{ activeType === item.type ? 'active' : '' }}">
+            {{ item.text }}
+        </view>
+    </block>
+</view>

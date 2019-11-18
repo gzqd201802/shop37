@@ -81,7 +81,20 @@ Page({
         data: {
           order_number
         }
-      })
+      });
+
+      // 5. 支付后，把商品从购物车中删除
+      // 1. 过滤出来没有选中的商品
+      const newCart = cartArr.filter(v => !v.goods_checked);
+      // 2. 把没有选中的商品保存到本地
+      wx.setStorageSync('cartArr', newCart);
+
+
+      // 6. 跳转到订单页面
+      wx.navigateTo({
+        url: '/pages/order/order?type=3',
+      });
+
 
       console.log('支付流程4', res2);
     } catch (error){
