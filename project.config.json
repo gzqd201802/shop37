@@ -75,7 +75,7 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "pages/order/order",
 					"pathName": "pages/order/order",
 					"query": "type=3",

@@ -1,5 +1,5 @@
 /* pages/order/order.wxss */
-.tabs {
+.tabs-title {
   height: 80rpx;
   display: flex;
   border-bottom: 1rpx solid #ccc;
@@ -23,4 +23,23 @@
   bottom: 0;
   left: 0;
   position: absolute;
+}
+.order-item {
+  border-bottom: 1rpx solid #ddd;
+  padding: 20rpx;
+}
+.order-item-row {
+  display: flex;
+  justify-content: space-between;
+}
+.order-item-row text:first-child {
+  color: #666;
+}
+.order-item-price {
+  color: red;
+  font-size: 30rpx;
+}
+.order-item-price::before {
+  content: "￥";
+  font-size: 80%;
 }

@@ -1,3 +1,4 @@
+import { myRequest } from '../../utils/request';
 // pages/order/order.js
 Page({
 
@@ -5,7 +6,10 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 活跃状态的 type
     activeType: 1,
+    // 订单列表
+    orders:[],
     // 用于 tabs 的数据
     tabs:[
       {
@@ -35,12 +39,35 @@ Page({
       activeType: type
     });
     // console.log(e);
+
+    this.getOrderData();
   },
+
+  getOrderData(){
+    const { activeType } = this.data;
+    myRequest({
+      url:'my/orders/all',
+      data:{
+        type: activeType
+      }
+    }).then(res=>{
+      // console.log(res);
+      const { orders } = res;
+      this.setData({
+        orders
+      })
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    const { type } = options;
+    this.setData({
+      activeType: +type
+    });
+    this.getOrderData();
   },
 
 })
