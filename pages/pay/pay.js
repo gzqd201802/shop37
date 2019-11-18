@@ -38,18 +38,62 @@ Page({
       }
     });
 
-    console.log(goods);
-    // 完善 myRequest 封装，如果 url 中包含了  my/ 就自动给请求的 header 添加 token
-    const res =  await myRequest({
-      url:'my/orders/create',
-      method:'POST',
-      data:{
-        order_price: totalMoney,
-        consignee_addr: address.addressDetail,
-        goods,
-      }
-    });
-    console.log('res',res)
+    try{
+      console.log(goods);
+      // 完善 myRequest 封装，如果 url 中包含了  my/ 就自动给请求的 header 添加 token
+      // 支付流程1 - 创建订单 - 完成后解构订单编号
+      const { order_number } = await myRequest({
+        url: 'my/orders/create',
+        method: 'POST',
+        data: {
+          order_price: totalMoney,
+          consignee_addr: address.addressDetail,
+          goods,
+        }
+      });
+
+      // 支付流程2 - 根据订单号 - 创建支付对象
+      const { pay } = await myRequest({
+        url: 'my/orders/req_unifiedorder',
+        method: 'POST',
+        data: {
+          order_number
+        }
+      });
+      console.log('支付流程2 pay', pay);
+      // 支付流程3 - 根据后端返回的支付对象 - 获取微信的支付功能支付对应订单
+      const res = await new Promise((resolve, reject) => {
+        wx.requestPayment({
+          ...pay,
+          success: res => {
+            resolve(res);
+          },
+          fail: err => {
+            reject(res);
+          }
+        })
+      });
+
+      // 支付流程4 - 让后台问微信服务器收到钱没有
+      const res2 = await myRequest({
+        url: 'my/orders/chkOrder',
+        method: 'POST',
+        data: {
+          order_number
+        }
+      })
+
+      console.log('支付流程4', res2);
+    } catch (error){
+      console.log(error);
+      wx.showToast({
+        icon:'none',
+        title: '支付遇到问题了',
+      })
+    }
+
+
+    // console.log('order_number', order_number)
   },
   // 登录换取 token
   getToken(e){
