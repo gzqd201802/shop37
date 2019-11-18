@@ -1,5 +1,6 @@
 // pages/cart/cart.js
 import { myRequest } from '../../utils/request.js'
+import regeneratorRuntime from '../../lib/runtime/runtime';
 
 Page({
 
@@ -14,7 +15,7 @@ Page({
     token:''
   },
 
-  payHandle(){
+  async payHandle(){
     const {
       totalMoney,
       address,
@@ -39,7 +40,7 @@ Page({
 
     console.log(goods);
     // 完善 myRequest 封装，如果 url 中包含了  my/ 就自动给请求的 header 添加 token
-    myRequest({
+    const res =  await myRequest({
       url:'my/orders/create',
       method:'POST',
       data:{
@@ -47,9 +48,8 @@ Page({
         consignee_addr: address.addressDetail,
         goods,
       }
-    }).then(res=>{
-      console.log(res);
-    })
+    });
+    console.log('res',res)
   },
   // 登录换取 token
   getToken(e){
