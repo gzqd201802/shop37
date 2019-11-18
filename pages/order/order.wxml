@@ -21,10 +21,12 @@
             </view>
             <view class="order-item-row">
                 <text>订单日期</text>
-                <text>1111</text>
+                <text>{{ item.format_time }}</text>
             </view>
-            <view class="order-item-row" wx:if="{{ item.pay_status === '0' }}">
-                <button size="mini">支付</button>
+            <view class="order-item-row">
+                <text>订单状态</text>
+                <button  wx:if="{{ item.pay_status === '0' }}" size="mini" type="warn">去支付</button>
+                <button  wx:if="{{ item.pay_status === '1' }}" size="mini" type="primary">看物流</button>
             </view>
         </view>
         </block>

@@ -54,7 +54,9 @@ Page({
       // console.log(res);
       const { orders } = res;
       this.setData({
-        orders
+        // ...v 先把原有的保留，再额外添加一个格式化的时间
+        // map 内部返回 对象，需要 () 包起来
+        orders: orders.map(v => ({ ...v, format_time: new Date(v.create_time * 1000).toLocaleString() }))
       })
     })
   },

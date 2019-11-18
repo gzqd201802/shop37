@@ -35,6 +35,9 @@
 .order-item-row text:first-child {
   color: #666;
 }
+.order-item-row button {
+  margin: 0;
+}
 .order-item-price {
   color: red;
   font-size: 30rpx;
