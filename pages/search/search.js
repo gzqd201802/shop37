@@ -61,6 +61,8 @@ Page({
     // 获取用户输入的值
     const { value } = e.detail;
 
+    if(value.trim() === '') return;
+
     // 获取本地的搜索历史
     let history = wx.getStorageSync('history') || [];
 
