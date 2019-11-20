@@ -1,1 +1,13 @@
 /* pages/my/my.wxss */
+.bg-box{
+    width: 750rpx;
+    height: 300rpx;
+    /* 本地图片引入会报错 */
+    /* background: url(../../images/default.png); */
+    background: url('https://www.baidu.com/img/bd_logo1.png') pink no-repeat center;
+    background-size: contain;
+    /* background: url(''); */
+}
+.iconfont{
+  font-size: 50rpx;
+}

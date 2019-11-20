@@ -1,2 +1,27 @@
 <!--pages/my/my.wxml-->
-<text>pages/my/my.wxml</text>
+<!-- <text>pages/my/my.wxml</text> -->
+<!-- <image src="{{ rawData.avatarUrl }}" />
+<text>{{ rawData.nickName }}</text> -->
+<!-- <open-data type="userAvatarUrl" />
+<open-data type="userNickName" /> -->
+<!-- <view class="bg-box"></view>
+<view class="iconfont icon-icon-test"></view>
+<view class="iconfont icon-icon-test1"></view>
+<view class="iconfont icon-icon-test2"></view>
+<view class="iconfont icon-icon-test3"></view>
+<button open-type="feedback">反馈系统</button>
+<button bindtap="callMe">调用小程序各种功能</button> -->
+
+
+<tabs propTabs="{{ tabsData }}" propId="{{ tabActiveId }}" bindaaaa="changeContent">
+
+  这里的内容会出现在插槽位置,
+  这个是孩子传过来的数据 {{ sonData }}
+
+</tabs>
+
+
+
+
+
+
