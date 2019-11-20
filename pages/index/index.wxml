@@ -4,7 +4,9 @@
 <view class="slider">
   <swiper class="slider-swiper" autoplay indicator-dots circular indicator-color="rgba(255, 255, 255, .3)" indicator-active-color="#fff">
     <swiper-item wx:for="{{ swiperData }}" wx:key="goods_id">
-      <image src="{{ item.image_src }}" mode="aspectFill"></image>
+      <navigator open-type="{{ item.open_type }}" url="{{ item.new_url }}">
+        <image src="{{ item.image_src }}"></image>
+      </navigator>
     </swiper-item>
   </swiper>
 </view>

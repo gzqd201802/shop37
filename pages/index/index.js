@@ -34,8 +34,18 @@ Page({
         // 这种直接赋值的写法是不行的，不会更新视图
         // this.swiperData = res.data.message;
         // 在小程序中需要通过 this.setData(对象)  更新页面的数据和视图
+        const {message} = res.data;
+
+        console.log(message);
+        const newData = message.map( v => {
+          return {
+            ...v,
+            new_url: v.navigator_url.replace(/\/pages\/(.+?)\/(.+?)(\?.+)/,'/pages\/$1\/$1$3')
+          }
+        })
+
         this.setData({
-          swiperData: res.data.message
+          swiperData: newData
         });
       }
     });
