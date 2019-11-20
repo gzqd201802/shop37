@@ -49,6 +49,13 @@ Page({
       pagesize
     } = this.data;
 
+    obj.query = query;
+    obj.pagesize = pagesize;
+    // console.log(cid);
+    // 从搜索页进来的列表是没有分类关键词的，没有分类发送请求的时候就没有 cid 参数
+    if(cid) obj.cid = cid;
+    // cid && (obj.cid = cid);
+
     myRequest({
       // url 路径，注意有 goods 
       url: 'goods/search',
@@ -57,9 +64,9 @@ Page({
         // cid 从分类页过来的 cid 值
         // cid: "5"
         ...obj,
-        query,
-        cid,
-        pagesize
+        // query,
+        // cid,
+        // pagesize
       }
     }).then(res => {
       this.setData({

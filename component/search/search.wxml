@@ -1,4 +1,4 @@
-<navigator url="/pages/search/search" class="search">
+<navigator url="/pages/search/search" open-type="redirect" class="search">
   <view class="search-in">
     <icon type="search" color="#b2b2b2"></icon> 搜索
   </view>
